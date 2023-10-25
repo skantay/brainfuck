@@ -14,9 +14,8 @@ To run Brainfuck programs using this interpreter, follow these steps:
 
 2. **Run Brainfuck Programs:**
    ```
-   go run main.go your-brainfuck-program.bf
+   go run main.go "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."
    ```
-   Replace `your-brainfuck-program.bf` with the path to your Brainfuck source file.
 
 ## Brainfuck Commands
 
@@ -25,7 +24,6 @@ To run Brainfuck programs using this interpreter, follow these steps:
 - `+`: Increment the byte at the memory pointer.
 - `-`: Decrement the byte at the memory pointer.
 - `.`: Output the byte at the memory pointer as a character.
-- `,`: Input a character and store it in the byte at the memory pointer.
 - `[`: Jump forward to the corresponding `]` if the byte at the memory pointer is 0.
 - `]`: Jump backward to the corresponding `[` if the byte at the memory pointer is nonzero.
 
@@ -33,22 +31,20 @@ To run Brainfuck programs using this interpreter, follow these steps:
 
 Here's an example Brainfuck program that prints "Hello, World!":
 
-```brainfuck
-++++++++[>++++[>++>+++>+++>+<<<<-]>+.-.>++.+++.>++.<<-----.>-.>.+++.------.>+.>.]
 ```
-
-To run this program using the interpreter:
-
+go run . "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>." | cat -e
+Hello World!$
 ```
-go run main.go hello-world.bf
 ```
-
-## Contributing
-
-If you want to contribute to this project and make it better, your help is very welcome. Create a fork of the project, make your changes, and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+go run . "+++++[>++++[>++++H>+++++i<<-]>>>++\n<<<<-]>>--------.>+++++.>." | cat -e
+Hi$
+```
+```
+go run . "++++++++++[>++++++++++>++++++++++>++++++++++<<<-]>---.>--.>-.>++++++++++." | cat -e
+abc$
+```
+```
+$ go run .
+$
+```
 ---
