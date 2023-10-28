@@ -8,8 +8,8 @@ To run Brainfuck programs using this interpreter, follow these steps:
 
 1. **Clone the Repository:**
    ```
-   git clone https://github.com/username/brainfuck-interpreter.git
-   cd brainfuck-interpreter
+   git clone https://github.com/skantay/brainfuck.git
+   cd brainfuck
    ```
 
 2. **Run Brainfuck Programs:**
