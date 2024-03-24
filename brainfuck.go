@@ -1,11 +1,22 @@
-package main
+package brainfuck
 
 import (
 	"fmt"
 	"os"
 )
 
-func interpretBrainfuck(code string) {
+func Brainfuck(file io.Reader) string {
+	scanner := bufio.NewScanner(file)
+	var res string
+
+	for scanner.Scan() {
+		res += scanner.Text()
+	}
+
+	return interpretBrainfuck(res)
+}
+
+func interpretBrainfuck(code string) string {
 	const memorySize = 30000
 	var memory [memorySize]byte
 	var pointer int
@@ -50,12 +61,6 @@ func interpretBrainfuck(code string) {
 		}
 	}
 
-	fmt.Print(output)
+	return output
 }
 
-func main() {
-	code := os.Args[1:]
-	if len(code) == 1 {
-		interpretBrainfuck(code[0])
-	}
-}
