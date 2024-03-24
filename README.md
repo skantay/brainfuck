@@ -6,45 +6,42 @@ Brainfuck is an esoteric programming language created in 1993 by Urban Müller. 
 
 To run Brainfuck programs using this interpreter, follow these steps:
 
-1. **Clone the Repository:**
+1. **Go get the package:**
    ```
-   git clone https://github.com/skantay/brainfuck.git
-   cd brainfuck
+   go get github.com/skantay/brainfuck@1.0.0
    ```
 
 2. **Run Brainfuck Programs:**
-   ```
-   go run main.go "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."
+   ```go
+   package main
+
+   import "github.com/skantay/brainfuck"
+
+   func main() {
+      file, _ := os.Open("file.brainfuck")
+      result := brainfuck.Brainfuck(file)
+   }
    ```
 
-## Brainfuck Commands
+## Brainfuck language syntax
 
-- `>`: Increment the memory pointer.
-- `<`: Decrement the memory pointer.
-- `+`: Increment the byte at the memory pointer.
-- `-`: Decrement the byte at the memory pointer.
-- `.`: Output the byte at the memory pointer as a character.
-- `[`: Jump forward to the corresponding `]` if the byte at the memory pointer is 0.
-- `]`: Jump backward to the corresponding `[` if the byte at the memory pointer is nonzero.
+- '>' increment the pointer
+- '<' decrement the pointer
+- '+' increment the pointed byte
+- '-' decrement the pointed byte
+- '.' print the pointed byte on standard output
+- '[' go to the matching ']' if the pointed byte is 0 (loop start)
+- ']' go to the matching '[' if the pointed byte is not 0 (loop end)
 
 ## Example
 
 Here's an example Brainfuck program that prints "Hello, World!":
 
 ```
-go run . "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>." | cat -e
+++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.
+```
+
 ```
 Hello World!$
 ```
-go run . "+++++[>++++[>++++H>+++++i<<-]>>>++\n<<<<-]>>--------.>+++++.>." | cat -e
-```
-Hi$
-```
-go run . "++++++++++[>++++++++++>++++++++++>++++++++++<<<-]>---.>--.>-.>++++++++++." | cat -e
-```
-abc$
-```
-$ go run .
-```
-$
 ---
