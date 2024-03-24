@@ -1,6 +1,6 @@
 # Brainfuck Interpreter
 
-(Brainfuck)[https://en.wikipedia.org/wiki/Brainfuck] is an esoteric programming language created in 1993 by Urban Müller. It is known for its minimalistic and Turing-complete design, consisting of only eight simple commands, yet it can be used to create complex programs. This repository contains a Brainfuck interpreter implemented in Go.
+[Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) is an esoteric programming language created in 1993 by Urban Müller. It is known for its minimalistic and Turing-complete design, consisting of only eight simple commands, yet it can be used to create complex programs. This repository contains a Brainfuck interpreter implemented in Go.
 
 ## Getting Started
 
