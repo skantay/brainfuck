@@ -6,21 +6,22 @@ import (
 	"io"
 )
 
-func Brainfuck(file io.Reader) (string, error) {
+func BrainfuckExtended1(file io.Reader) (string, error) {
 	scanner := bufio.NewScanner(file)
-	var res string
+	var code string
 
 	for scanner.Scan() {
-		res += scanner.Text()
+		code += scanner.Text()
 	}
-
-	return interpretBrainfuck(res)
+	return interpretBrainfuckExtended1([]rune(code))
 }
 
-func interpretBrainfuck(code string) (string, error) {
-	memory := make([]byte, len(code)*len(code))
+// _
+func interpretBrainfuckExtended1(code []rune) (string, error) {
+	memory := make([]byte, 30000)
 	var pointer int
-	var output string
+	output := make([]byte, 0)
+	var storage byte
 
 	for i := 0; i < len(code); i++ {
 		switch code[i] {
@@ -33,7 +34,7 @@ func interpretBrainfuck(code string) (string, error) {
 		case '-':
 			memory[pointer]--
 		case '.':
-			output += string(memory[pointer])
+			output = append(output, memory[pointer])
 		case '[':
 			if memory[pointer] == 0 {
 				loopCount := 1
@@ -58,10 +59,28 @@ func interpretBrainfuck(code string) (string, error) {
 					}
 				}
 			}
+		case '@':
+			return string(output), nil
+		case '$':
+			storage = memory[pointer]
+		case '!':
+			memory[pointer] = storage
+		case '}':
+			memory[pointer] >>= 1
+		case '{':
+			memory[pointer] <<= 1
+		case '~':
+			memory[pointer] = ^memory[pointer]
+		case '^':
+			memory[pointer] ^= storage
+		case '&':
+			memory[pointer] &= storage
+		case '|':
+			memory[pointer] |= storage
 		default:
 			return "", errors.New("compiler error: unknown char")
 		}
 	}
 
-	return output, nil
+	return string(output), nil
 }
